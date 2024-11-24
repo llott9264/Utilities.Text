@@ -7,10 +7,9 @@ namespace Utilities.Text.Tests
 		{
 			//Arrange
 			string textBefore = "Hello World!";
-			string textAfter = string.Empty;
 
 			//Act
-			textAfter = textBefore.Left(6);
+			string textAfter = textBefore.Left(6);
 			
 
 			//Assert
@@ -22,11 +21,9 @@ namespace Utilities.Text.Tests
 		{
 			//Arrange
 			string textBefore = "Hello World!";
-			string textAfter = string.Empty;
 
 			//Act
-			textAfter = textBefore.Left(20);
-
+			string textAfter = textBefore.Left(20);
 
 			//Assert
 			Assert.True(textAfter == "Hello World!");
@@ -37,10 +34,9 @@ namespace Utilities.Text.Tests
 		{
 			//Arrange
 			string textBefore = null;
-			string textAfter = string.Empty;
-
+			
 			//Act
-			textAfter = textBefore.Left(20);
+			string textAfter = textBefore.Left(20);
 
 
 			//Assert
@@ -52,10 +48,9 @@ namespace Utilities.Text.Tests
 		{
 			//Arrange
 			string textBefore = string.Empty;
-			string textAfter = string.Empty;
 
 			//Act
-			textAfter = textBefore.Left(20);
+			string textAfter = textBefore.Left(20);
 
 
 			//Assert
