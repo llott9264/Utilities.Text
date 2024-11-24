@@ -22,7 +22,7 @@ jobs:
       GITHUB_NUGET_API_KEY: ${{ secrets.GITHUB_TOKEN }}
       GITHUB_NUGET_URL: https://nuget.pkg.github.com/llott9264/index.json
       PROJECT_PATH: ./src/Utilities.Text/Utilities.Text.csproj
-      NUPKG_PATH: ./artifacts/Utilities.Text.${{ env.PACKAGE_VERSION }}.nupkg
+      NUPKG_PATH: "./artifacts/Utilities.Text.${{ env.PACKAGE_VERSION }}.nupkg"
       
     steps:
     - uses: actions/checkout@v4
