@@ -21,20 +21,22 @@ jobs:
       PACKAGE_VERSION: 1.2.${{ github.run_number }}-dev
       GITHUB_NUGET_API_KEY: ${{ secrets.GITHUB_TOKEN }}
       GITHUB_NUGET_URL: https://nuget.pkg.github.com/llott9264/index.json
+      PROJECT_PATH: ./src/Utilities.Text/Utilities.Text.csproj
+      NUPKG_PATH: ./artifacts/Utilities.Text.${{ env.PACKAGE_VERSION }}.nupkg
       
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.x'
 
     - name: Build NuGet Package
-      run: dotnet pack ./src/Utilities.Text/Utilities.Text.csproj /p:Version=${{ env.PACKAGE_VERSION }} --configuration ${{ env.BUILD_CONFIG }} --output ./artifacts
+      run: dotnet pack ${{ env.PROJECT_PATH}} /p:Version=${{ env.PACKAGE_VERSION }} --configuration ${{ env.BUILD_CONFIG }} --output ./artifacts
 
     - name: Publish NuGet Package
-      run: dotnet nuget push ./artifacts/Utilities.Text.${{ env.PACKAGE_VERSION }}.nupkg --api-key ${{ env.GITHUB_NUGET_API_KEY }} --source ${{ env.GITHUB_NUGET_URL }} --skip-duplicate
+      run: dotnet nuget push ${{ env.NUPKG_PATH}} --api-key ${{ env.GITHUB_NUGET_API_KEY }} --source ${{ env.GITHUB_NUGET_URL }} --skip-duplicate
   pull-request-not-merged:
     if: github.event.pull_request.merged == false
     name: Cancel Nuget Package Release
