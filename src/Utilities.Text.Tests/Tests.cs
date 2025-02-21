@@ -114,6 +114,112 @@ namespace Utilities.Text.Tests
 			Assert.True(textAfter == string.Empty);
 		}
 
+		[Fact]
+		public void RemoveCrLf_StringIsEmpty_ReturnsEmptyString_True()
+		{
+			//Arrange
+			string textBefore = string.Empty;
 
+			//Act
+			string textAfter = textBefore.RemoveCrLf();
+
+			//Assert
+			Assert.True(textAfter == string.Empty);
+		}
+
+		[Fact]
+		public void RemoveCrLf_StringIsNull_ReturnsEmptyString_True()
+		{
+			//Arrange
+			string textBefore = null;
+
+			//Act
+			string textAfter = textBefore.RemoveCrLf();
+
+			//Assert
+			Assert.True(textAfter == string.Empty);
+		}
+
+		[Fact]
+		public void RemoveCrLf_StringHasCrLf_ReturnsStringWithoutCrLf_True()
+		{
+			//Arrange
+			string textBefore = "Hell\n\ro World!";
+
+			//Act
+			string textAfter = textBefore.RemoveCrLf();
+
+			//Assert
+			Assert.True(textAfter == "Hello World!");
+		}
+
+		[Fact]
+		public void RemoveCrLf_StringDoesNotHaveCrLf_ReturnsString_True()
+		{
+			//Arrange
+			string textBefore = "Hello World!";
+
+			//Act
+			string textAfter = textBefore.RemoveCrLf();
+
+			//Assert
+			Assert.True(textAfter == "Hello World!");
+		}
+
+		[Fact]
+		public void RemoveCharacters_StringIsNull_ReturnsEmptyString_True()
+		{
+			//Arrange
+			string textBefore = null;
+			List<string> charactersToRemove = new List<string> { "o", "l" };
+
+			//Act
+			string textAfter = textBefore.RemoveCharacters(charactersToRemove);
+
+			//Assert
+			Assert.True(textAfter == string.Empty);
+		}
+
+		[Fact]
+		public void RemoveCharacters_StringIsEmpty_ReturnsEmptyString_True()
+		{
+			//Arrange
+			string textBefore = string.Empty;
+			List<string> charactersToRemove = new List<string> { "o", "l" };
+
+			//Act
+			string textAfter = textBefore.RemoveCharacters(charactersToRemove);
+
+			//Assert
+			Assert.True(textAfter == string.Empty);
+		}
+
+		[Fact]
+		public void RemoveCharacters_StringHasCharactersToRemove_ReturnsStringWithoutCharacters_True()
+		{
+			//Arrange
+			string textBefore = "Hello World!";
+			List<string> charactersToRemove = new List<string> { "o", "l" };
+
+			//Act
+			string textAfter = textBefore.RemoveCharacters(charactersToRemove);
+
+			//Assert
+			Assert.True(textAfter == "He Wrd!");
+		}
+
+		[Fact]
+		public void RemoveCharacters_StringDoesNotHaveCharactersToRemove_ReturnsString_True()
+		{
+			//Arrange
+			string textBefore = "Hello World!";
+			List<string> charactersToRemove = new List<string> { "z", "x" };
+
+			//Act
+			string textAfter = textBefore.RemoveCharacters(charactersToRemove);
+
+			//Assert
+			Assert.True(textAfter == "Hello World!");
+		}
 	}
 }
