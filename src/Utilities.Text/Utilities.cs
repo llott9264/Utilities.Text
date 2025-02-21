@@ -15,5 +15,17 @@
 				? value
 				: value.Substring(Math.Max(0, value.Length - length));
 		}
+		
+		public static string RemoveCharacters(this string value, List<string> charactersToRemove)
+		{
+			return string.IsNullOrEmpty(value)
+				? string.Empty
+				: charactersToRemove.Aggregate(value, (current, s) => current.Replace(s, "")).Trim();
+		}
+
+		public static string RemoveCrLf(this string value)
+		{
+			return RemoveCharacters(value, ["\n", "\r"]);
+		}
 	}
 }
