@@ -18,14 +18,21 @@
 		
 		public static string RemoveCharacters(this string value, List<string> charactersToRemove)
 		{
-			return string.IsNullOrEmpty(value)
-				? string.Empty
-				: charactersToRemove.Aggregate(value, (current, s) => current.Replace(s, "")).Trim();
+			Dictionary<string, string> charactersToReplace = new();
+			charactersToRemove.ForEach(s => charactersToReplace.Add(s, ""));
+			return ReplaceCharacters(value, charactersToReplace);
 		}
 
 		public static string RemoveCrLf(this string value)
 		{
 			return RemoveCharacters(value, ["\n", "\r"]);
+		}
+
+		public static string ReplaceCharacters(this string value, Dictionary<string, string> charactersToReplace)
+		{
+			return string.IsNullOrEmpty(value)
+				? string.Empty
+				: charactersToReplace.Aggregate(value, (current, keyValuePair) => current.Replace(keyValuePair.Key, keyValuePair.Value));
 		}
 	}
 }
