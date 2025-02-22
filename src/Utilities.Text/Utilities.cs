@@ -15,5 +15,24 @@
 				? value
 				: value.Substring(Math.Max(0, value.Length - length));
 		}
+		
+		public static string RemoveCharacters(this string value, List<string> charactersToRemove)
+		{
+			Dictionary<string, string> charactersToReplace = new();
+			charactersToRemove.ForEach(s => charactersToReplace.Add(s, ""));
+			return ReplaceCharacters(value, charactersToReplace);
+		}
+
+		public static string RemoveCrLf(this string value)
+		{
+			return RemoveCharacters(value, ["\n", "\r"]);
+		}
+
+		public static string ReplaceCharacters(this string value, Dictionary<string, string> charactersToReplace)
+		{
+			return string.IsNullOrEmpty(value)
+				? string.Empty
+				: charactersToReplace.Aggregate(value, (current, keyValuePair) => current.Replace(keyValuePair.Key, keyValuePair.Value));
+		}
 	}
 }
