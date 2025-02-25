@@ -1,3 +1,5 @@
+﻿namespace Utilities.Text.Tests;
+
 using Xunit;
 
 public class ReplaceDiacriticsTests
