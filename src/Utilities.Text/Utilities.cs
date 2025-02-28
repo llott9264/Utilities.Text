@@ -1,4 +1,7 @@
-﻿namespace Utilities.Text
+﻿using System.Globalization;
+using System.Text;
+
+namespace Utilities.Text
 {
 	public static class Utilities
 	{ 
