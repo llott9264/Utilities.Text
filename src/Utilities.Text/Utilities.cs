@@ -1,4 +1,7 @@
-﻿namespace Utilities.Text
+﻿using System.Globalization;
+using System.Text;
+
+namespace Utilities.Text
 {
 	public static class Utilities
 	{ 
@@ -33,6 +36,26 @@
 			return string.IsNullOrEmpty(value)
 				? string.Empty
 				: charactersToReplace.Aggregate(value, (current, keyValuePair) => current.Replace(keyValuePair.Key, keyValuePair.Value));
+		}
+
+		public static string ReplaceDiacritics(this string value)
+		{
+			if (string.IsNullOrEmpty(value))
+				return value;
+
+			string normalizedString = value.Normalize(NormalizationForm.FormD);
+			StringBuilder stringBuilder = new();
+
+			foreach (char c in normalizedString)
+			{
+				UnicodeCategory unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+				if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+				{
+					stringBuilder.Append(c);
+				}
+			}
+
+			return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
 		}
 	}
 }
